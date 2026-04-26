@@ -723,3 +723,20 @@ if __name__ == '__main__':
     os.makedirs('uploads', exist_ok=True)
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
+
+@app.route("/debug-tesseract")
+def debug_tesseract():
+    import shutil
+    import subprocess
+
+    path = shutil.which("tesseract")
+
+    try:
+        version = subprocess.check_output(["tesseract", "--version"]).decode()
+    except Exception as e:
+        version = str(e)
+
+    return {
+        "which_path": path,
+        "version_output": version
+    }
