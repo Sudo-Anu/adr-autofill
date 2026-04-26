@@ -2,7 +2,9 @@ import os
 import re
 import tempfile
 import datetime
+import pytesseract
 
+pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 from flask import Flask, render_template, request, jsonify, send_file
 from werkzeug.utils import secure_filename
 import pytesseract
